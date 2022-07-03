@@ -30,3 +30,28 @@ jobs:
         with:
           name: production-files
           path: ./dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/head/main'
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: production-files
+          path: ./dist
+
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with: 
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "svelte-weather-test"
+          heroku_email: "cjlubosana@gmail.com"
+          healthcheck: "https://svelte-weather-test.herokuapp.com/health"
+    
