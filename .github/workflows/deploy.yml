@@ -52,5 +52,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "svelte-weather-test"
           heroku_email: "cjlubosana@gmail.com"
-          healthcheck: "https://svelte-weather-test.herokuapp.com/health"
+          #healthcheck: "https://svelte-weather-test.herokuapp.com/health"
     
